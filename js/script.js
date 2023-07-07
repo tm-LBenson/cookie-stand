@@ -15,6 +15,7 @@ function City(name, minCust, maxCust, avgSales) {
   this.minCust = minCust;
   this.maxCust = maxCust;
   this.avgSales = avgSales;
+  this.totalSales = 0;
 }
 
 City.prototype.hourlySales = function () {
@@ -36,7 +37,7 @@ StateForDom.prototype.createHeader = function () {
   thTotal.innerText = 'Total';
   this.theadRow.appendChild(thCities);
 
-  for (let i = 6; i < this.timeShopCloses + 1; i++) {
+  for (let i = this.startTimeOpening; i < this.timeShopCloses + 1; i++) {
     const th = document.createElement('th');
     if (i < 13) {
       th.innerText = i + 'AM';
@@ -66,8 +67,8 @@ StateForDom.prototype.addCitiesToDom = function () {
     }
     const tdTotal = document.createElement('td');
     tdTotal.innerText = hourlyTotals;
+    this.cities[i].totalSales += hourlyTotals;
     tr.appendChild(tdTotal);
-
     this.table.appendChild(tr);
   }
 };
@@ -75,6 +76,17 @@ StateForDom.prototype.addCitiesToDom = function () {
 StateForDom.prototype.addOneCityToDom = function () {
   let cityToAddIndex = this.cities.length - 1;
   this.main.appendChild(this.cities[cityToAddIndex]);
+};
+
+StateForDom.prototype.createFooter = function () {
+  const oldTfoot = document.querySelector('tfoot');
+  if (oldTfoot) {
+    oldTfoot.remove();
+  }
+  const tfoot = document.createElement('tfoot');
+  const td = document.createElement('td');
+  td.innerText = 'Totals';
+  tfoot.appendChild(td);
 };
 
 let seattle = new City('Seattle', 23, 65, 6.3);
@@ -88,3 +100,4 @@ stateForDom.cities.push(seattle, tokyo, dubai, paris, lima);
 stateForDom.createHeader();
 stateForDom.addTableToDom();
 stateForDom.addCitiesToDom();
+stateForDom.createFooter();
