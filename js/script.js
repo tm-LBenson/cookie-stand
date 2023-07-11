@@ -7,6 +7,8 @@ function StateForDom() {
   this.table = document.createElement('table');
   this.thead = document.createElement('thead');
   this.theadRow = document.createElement('tr');
+  this.form = document.querySelector('form');
+  this.form.addEventListener('submit', addLocationForm);
   this.cities = [];
 }
 
@@ -20,7 +22,7 @@ function City(name, minCust, maxCust, avgSales) {
 
 City.prototype.hourlySales = function () {
   return Math.ceil(
-    Math.random() * (this.maxCust - this.minCust) + this.minCust
+    Math.random() * (this.maxCust - this.minCust) + this.minCust,
   );
 };
 
@@ -101,3 +103,11 @@ stateForDom.createHeader();
 stateForDom.addTableToDom();
 stateForDom.addCitiesToDom();
 stateForDom.createFooter();
+
+function addLocationForm(e) {
+  e.preventDefault();
+  const location = e.target.location.value;
+  const maxCust = e.target['max-cust'].value;
+  const minCust = e.target['min-cust'].value;
+  const avgSales = e.target['avg-sales'].value;
+}
