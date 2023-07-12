@@ -46,7 +46,7 @@ StateForDom.prototype.createHeader = function () {
     } else {
       th.innerText = i - 12 + 'PM';
     }
-    console.log(th.innerText);
+
     this.theadRow.appendChild(th);
   }
 
@@ -85,10 +85,12 @@ StateForDom.prototype.createFooter = function () {
   if (oldTfoot) {
     oldTfoot.remove();
   }
+
   const tfoot = document.createElement('tfoot');
   const td = document.createElement('td');
   td.innerText = 'Totals';
   tfoot.appendChild(td);
+  this.table.appendChild(tfoot);
 };
 
 let seattle = new City('Seattle', 23, 65, 6.3);
