@@ -18,6 +18,7 @@ function City(name, minCust, maxCust, avgSales) {
   this.maxCust = maxCust;
   this.avgSales = avgSales;
   this.totalSales = 0;
+  this.hourlySalesArray = [];
 }
 
 City.prototype.hourlySales = function () {
@@ -64,6 +65,7 @@ StateForDom.prototype.addCitiesToDom = function () {
       const td = document.createElement('td');
       const hourlySales = this.cities[i].hourlySales();
       td.innerText = hourlySales;
+      this.cities[i].hourlySalesArray.push(hourlySales);
       tr.appendChild(td);
       hourlyTotals += hourlySales;
     }
@@ -89,7 +91,18 @@ StateForDom.prototype.createFooter = function () {
   const tfoot = document.createElement('tfoot');
   const td = document.createElement('td');
   td.innerText = 'Totals';
+  const totalOfTotals = Array(14).fill(0);
   tfoot.appendChild(td);
+  for (let i = 0; i < this.cities.length - 1; i++) {
+    for (let j = 0; j < 14; j++) {
+      totalOfTotals[j] += this.cities[i].hourlySalesArray[j];
+    }
+  }
+  for (let i = 0; i < 14; i++) {
+    const td = document.createElement('td');
+    td.innerText = totalOfTotals[i];
+    tfoot.appendChild(td);
+  }
   this.table.appendChild(tfoot);
 };
 
