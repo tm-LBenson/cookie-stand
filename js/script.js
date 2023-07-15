@@ -98,9 +98,16 @@ StateForDom.prototype.createFooter = function () {
       totalOfTotals[j] += this.cities[i].hourlySalesArray[j];
     }
   }
+  let finalTotal = 0;
   for (let i = 0; i < 14; i++) {
+    finalTotal += totalOfTotals[i];
     const td = document.createElement('td');
     td.innerText = totalOfTotals[i];
+    tfoot.appendChild(td);
+  }
+  if (finalTotal > 0) {
+    let td = document.createElement('td');
+    td.innerText = finalTotal;
     tfoot.appendChild(td);
   }
   this.table.appendChild(tfoot);
