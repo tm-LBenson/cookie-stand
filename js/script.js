@@ -113,6 +113,10 @@ StateForDom.prototype.createFooter = function () {
   this.table.appendChild(tfoot);
 };
 
+StateForDom.prototype.addNewCityToDOM = function () {
+  //
+};
+
 let seattle = new City('Seattle', 23, 65, 6.3);
 let tokyo = new City('Tokyo', 3, 24, 1.2);
 let dubai = new City('Dubai', 11, 38, 3.7);
