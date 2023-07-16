@@ -132,4 +132,7 @@ function addLocationForm(e) {
   const maxCust = e.target['max-cust'].value;
   const minCust = e.target['min-cust'].value;
   const avgSales = e.target['avg-sales'].value;
+  const newCity = new City(location, minCust, maxCust, avgSales);
+  stateForDom.cities.push(newCity);
+  stateForDom.createFooter();
 }
