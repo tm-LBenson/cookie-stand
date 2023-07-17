@@ -22,9 +22,10 @@ function City(name, minCust, maxCust, avgSales) {
 }
 
 City.prototype.hourlySales = function () {
-  return Math.ceil(
+  let randomNumber = Math.ceil(
     Math.random() * (this.maxCust - this.minCust) + this.minCust,
   );
+  return randomNumber * this.avgSales;
 };
 
 StateForDom.prototype.addTableToDom = function () {
