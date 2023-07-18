@@ -127,26 +127,21 @@ StateForDom.prototype.addNewCityToDOM = function () {
   this.cities.at(-1).totalSales += hourlyTotals;
   tr.appendChild(tdTotal);
   this.table.appendChild(tr);
-
-  const newCity = this.cities.at(-1).hourlySalesArray;
-  console.log(newCity);
-  for (let i = 0; i < newCity.length - 1; i++) {
-    console.log(newCity[i]);
-  }
 };
 
-let seattle = new City('Seattle', 23, 65, 6.3);
-let tokyo = new City('Tokyo', 3, 24, 1.2);
-let dubai = new City('Dubai', 11, 38, 3.7);
-let paris = new City('Paris', 2, 16, 4.6);
-let lima = new City('Lima', 2, 16, 4.6);
+StateForDom.prototype.init = function () {
+  let seattle = new City('Seattle', 23, 65, 6.3);
+  let tokyo = new City('Tokyo', 3, 24, 1.2);
+  let dubai = new City('Dubai', 11, 38, 3.7);
+  let paris = new City('Paris', 2, 16, 4.6);
+  let lima = new City('Lima', 2, 16, 4.6);
 
-let stateForDom = new StateForDom();
-stateForDom.cities.push(seattle, tokyo, dubai, paris, lima);
-stateForDom.createHeader();
-stateForDom.addTableToDom();
-stateForDom.addCitiesToDom();
-stateForDom.createFooter();
+  this.cities.push(seattle, tokyo, dubai, paris, lima);
+  this.createHeader();
+  this.addTableToDom();
+  this.addCitiesToDom();
+  this.createFooter();
+};
 
 function addLocationForm(e) {
   e.preventDefault();
@@ -159,3 +154,6 @@ function addLocationForm(e) {
   stateForDom.addNewCityToDOM();
   stateForDom.createFooter();
 }
+
+let stateForDom = new StateForDom();
+stateForDom.init();
